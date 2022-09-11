@@ -1,0 +1,7 @@
+---
+- name: Update to {{ java_version }}
+  hosts: "{{ var_host | default('java') }}"
+  become: yes
+  gather_facts: yes
+  roles:
+    - java_update

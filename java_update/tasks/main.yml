@@ -1,0 +1,25 @@
+---
+# tasks file for java_update
+- name: install or update packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: True
+  with_items:
+    - "{{ packages }}"
+  when: (ansible_facts['pkg_mgr'] == "apt")
+  notify: reload jstatd
+  tags: install pkg
+
+- name: Move simlink java -> java_old
+  ansible.builtin.shell: mv /home/panbet/{java,java_old}
+  args:
+    executable: /bin/bash
+  ignore_errors: True
+  tags: move to java_old
+
+- name: new link to JAVA_HOME
+  ansible.builtin.shell: ln -s /usr/lib/jvm/jdk_17* /home/panbet/java
+  args:
+    executable: /bin/bash
+  tags: link java

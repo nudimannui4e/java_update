@@ -1,0 +1,6 @@
+---
+# handlers file for java_update
+- name: reload jstatd
+  service: >
+    name=jstatd
+    state=reloaded

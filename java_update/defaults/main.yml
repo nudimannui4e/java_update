@@ -1,0 +1,7 @@
+---
+# defaults file for java_update
+packages:
+  - java-instance-pan
+  - jstatd-pan
+  - java17-pan
+
